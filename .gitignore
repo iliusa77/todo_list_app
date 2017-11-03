@@ -1,0 +1,3 @@
+*.pyc
+.venv35
+.idea
