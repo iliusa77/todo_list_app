@@ -8,9 +8,18 @@
 
 <body>
 <div id="tasks">
+
+    <h3>List of tasks</h3>
     <ul>
         <li v-for="task in tasks">
             {{ task.name }}
+        </li>
+    </ul>
+
+    <h3>List of groups of tasks</h3>
+    <ul>
+        <li v-for="group in groups">
+            {{ group.name }}
         </li>
     </ul>
 
