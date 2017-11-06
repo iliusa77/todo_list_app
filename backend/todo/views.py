@@ -28,36 +28,55 @@ class GroupViewSet(viewsets.ModelViewSet):
     queryset = Group.objects.all()
     serializer_class = GroupSerializer
 
-class TaskViewSet(viewsets.ModelViewSet):
-    """
-    API endpoint that allows tasks to be viewed or edited.
-    """
+
+# ViewSet Approach (3 layer)
+# class TaskViewSet(viewsets.ModelViewSet):
+#     """
+#     API endpoint that allows tasks to be viewed or edited.
+#     """
+#     pagination_class = LimitOffsetPagination
+#     permission_classes = []
+#     queryset = Task.objects.select_related('group').all()
+#     serializer_class = TaskSerializer
+
+# class GroupTaskViewSet(viewsets.ModelViewSet):
+#     """
+#     API endpoint that allows group tasks to be viewed or edited.
+#     """
+#     pagination_class = LimitOffsetPagination
+#     permission_classes = [IsAuthenticatedOrReadOnly]
+#     queryset = GroupTask.objects.all()
+#     serializer_class = GroupTaskSerializer
+
+
+# Generic Viewes Approach (2 layer)
+from rest_framework.generics import ListCreateAPIView, ListAPIView, RetrieveUpdateDestroyAPIView
+
+class TaskListView(ListCreateAPIView):
     pagination_class = LimitOffsetPagination
     permission_classes = [IsAuthenticatedOrReadOnly]
-    queryset = Task.objects.all()
+    queryset = Task.objects.select_related('group').all()
     serializer_class = TaskSerializer
 
-# class TaskList(APIView):
-#     """
-#     List all snippets, or create a new snippet.
-#     """
-#     def get(self, request, format=None):
-#         tasks = Task.objects.all()
-#         serializer = TaskSerializer(tasks, many=True)
-#         return Response(serializer.data)
-#
-#     def post(self, request, format=None):
-#         serializer = TaskSerializer(data=request.data)
-#         if serializer.is_valid():
-#             serializer.save()
-#             return Response(serializer.data, status=status.HTTP_201_CREATED)
-#         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-class GroupTaskViewSet(viewsets.ModelViewSet):
-    """
-    API endpoint that allows group tasks to be viewed or edited.
-    """
+class TaskDetailView(RetrieveUpdateDestroyAPIView):
+    pagination_class = LimitOffsetPagination
+    permission_classes = [IsAuthenticatedOrReadOnly]
+    queryset = Task.objects.select_related('group').all()
+    serializer_class = TaskSerializer
+
+class GroupListView(ListCreateAPIView):
     pagination_class = LimitOffsetPagination
     permission_classes = [IsAuthenticatedOrReadOnly]
     queryset = GroupTask.objects.all()
     serializer_class = GroupTaskSerializer
+
+class GroupListDetailView(RetrieveUpdateDestroyAPIView):
+    pagination_class = LimitOffsetPagination
+    permission_classes = [IsAuthenticatedOrReadOnly]
+    queryset = GroupTask.objects.all()
+    serializer_class = GroupTaskSerializer
+
+# ApiViewes Approach (1 layer)
+
+

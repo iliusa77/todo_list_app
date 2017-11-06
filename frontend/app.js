@@ -1,8 +1,8 @@
-var tasks = new Vue({
+var app = new Vue({
         el: '#tasks',
 
         data: {
-            getTemp: []
+            tasks: []
         },
 
         created: function () {
@@ -13,7 +13,7 @@ var tasks = new Vue({
             fetchData: function () {
                 this.$http.get('http://127.0.0.1:8000/tasks/')
                           .then(response => {
-                             this.getTemp = response.data
+                             this.tasks = response.data
                              // or like this this.getTemp = response.json()
                           })
             }

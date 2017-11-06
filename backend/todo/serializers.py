@@ -20,6 +20,13 @@ class GroupSerializer(serializers.HyperlinkedModelSerializer):
 
 
 class TaskSerializer(serializers.ModelSerializer):
+
+    group_name = serializers.CharField(source='group.name', read_only=True)
+    # custom = serializers.SerializerMethodField(method_name='foo')
+    #
+    # def foo(self, instance):
+    #     return 'hello'
+
     class Meta:
         model = Task
         fields = [
@@ -27,6 +34,9 @@ class TaskSerializer(serializers.ModelSerializer):
             'name',
             'description',
             'group',
+            'group_id',
+            'group_name',
+            #'custom'
         ]
 
 class GroupTaskSerializer(serializers.ModelSerializer):

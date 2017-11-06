@@ -84,20 +84,20 @@ WSGI_APPLICATION = 'project.wsgi.application'
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
 
 
-# DATABASES = {
-#      'default': dj_database_url.config()
-# }
-
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'tododb',
-        'USER': 'devadmin',
-        'PASSWORD': '',
-        'HOST': 'localhost',
-        'PORT': ''
-    }
+     'default': dj_database_url.config()
 }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'tododb',
+#         'USER': 'devadmin',
+#         'PASSWORD': '',
+#         'HOST': 'localhost',
+#         'PORT': ''
+#     }
+# }
 
 # Password validation
 # https://docs.djangoproject.com/en/1.11/ref/settings/#auth-password-validators

@@ -8,9 +8,12 @@
 
 <body>
 <div id="tasks">
-    {{getTemp[0]}}<br>
-    {{getTemp[1]}}<br>
-    {{getTemp[2]}}
+    <ul>
+        <li v-for="task in tasks">
+            {{ task.name }}
+        </li>
+    </ul>
+
 </div> <!--end of tasks-->
 </body>
 
